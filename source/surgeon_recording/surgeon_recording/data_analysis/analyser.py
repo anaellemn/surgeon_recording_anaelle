@@ -47,7 +47,7 @@ class Analyser(object):
 
         results=dict()
 
-        for k, name in enumerate(data_files):
+        for k, name in enumerate(data_files):               #pour chaque datafile, on ouvre le optitrack csv
           
             opt_data=pd.read_csv(join(data_folder, 'data10_08_20/'+name+"/optitrack.csv")).set_index('index')
 
@@ -80,13 +80,13 @@ class Analyser(object):
                 
                 for j, axes in enumerate(coordinates):
                     
-                    tab_plot[axes+'_pos']=opt_data[names[i]+"_"+axes]
-                    tab_plot[axes+'_pos_smooth']= gaussian_filter(tab_plot[axes+'_pos'],sigma=sigma[0])
+                    tab_plot[axes+'_pos']=opt_data[names[i]+"_"+axes]                                      #axes: x,y,z, prend les données de position
+                    tab_plot[axes+'_pos_smooth']= gaussian_filter(tab_plot[axes+'_pos'],sigma=sigma[0])    #filter
 
-                    tab_plot[axes+'_speed']=np.gradient(tab_plot[axes+'_pos_smooth'],period)
+                    tab_plot[axes+'_speed']=np.gradient(tab_plot[axes+'_pos_smooth'],period)                    #obtient vitesse depuis position et filter
                     tab_plot[axes+'_speed_smooth'] = gaussian_filter(tab_plot[axes+'_speed'],sigma=sigma[1])
 
-                    tab_plot[axes+'_acc']=np.gradient( tab_plot[axes+'_speed_smooth'],period)
+                    tab_plot[axes+'_acc']=np.gradient( tab_plot[axes+'_speed_smooth'],period)                   #obtient acc depuis vitesse et filter
                     tab_plot[axes+'_acc_smooth']= gaussian_filter(tab_plot[axes+'_acc'],sigma=sigma[2])
 
                     tab_plot[axes+'_jerk']=np.gradient(tab_plot[axes+'_acc_smooth'],period)
@@ -291,7 +291,6 @@ class Analyser(object):
 
         nb_data=len(data_files)
         tps_rows=graph_choice.index('tps')+1
-
         
         cols = plotly.colors.DEFAULT_PLOTLY_COLORS
         f_interpol = [0]*nb_data

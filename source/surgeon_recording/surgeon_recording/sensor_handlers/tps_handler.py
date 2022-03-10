@@ -42,14 +42,14 @@ class TPSHandler(SensorHandler):
     def read_calibration_file(calibration_file):
         # get the parameters to know which are the sensors to read
         parameters = TPSHandler.get_parameters()
-        selected_fingers = [f['streaming_id'] for f in parameters['fingers']]
+        selected_fingers = [f['streaming_id'] for f in parameters['fingers']]               #f prend la valeurs des fingers qui sont dans parameters, et selected prend la valeur des id des fingers
         calibration_factors = []
         if os.path.exists(calibration_file):
             file = open(calibration_file, 'r')
             lines = file.readlines()
             # only read the lines counting as selected fingers
-            for i in selected_fingers:
-                line = lines[i+1].split('\t')[:-1]
+            for i in selected_fingers:                                                   #i prend la valeur des id des fingers
+                line = lines[i+1].split('\t')[:-1]                                       # prend la ligne de l'id du finger (+1 car commence de 0?), split '\t' correspond a split au tab caharacter
                 # if there is calibration data
                 if len(line) > 1:
                     calibration_factors.append(TPSHandler.compute_calibration_factor(line))
@@ -59,7 +59,7 @@ class TPSHandler(SensorHandler):
     def load_calibrations():
         filepath = os.path.abspath(os.path.dirname(__file__))
         config_folder = join(filepath, '..', '..', 'config')
-        calibration_file1 = join(config_folder, 'FingerTPS_EPFL1-cal.txt')
+        calibration_file1 = join(config_folder, 'FingerTPS_EPFL1-cal.txt')        #2 fichiers de calibration selon si on utilise EPFL1 et/ou EPFL2
         calibration_file2 = join(config_folder, 'FingerTPS_EPFL2-cal.txt')
         calib1 = TPSHandler.read_calibration_file(calibration_file1)
         calib2 = TPSHandler.read_calibration_file(calibration_file2)
