@@ -3,7 +3,7 @@
 	         "sensor_ip": "localhost",
 	         "streaming_ip": "*",
 	         "streaming_port": 5556,
-	         "status": "on" },
+	         "status": "off" },
 
 	"optitrack": { "frames": [{ "label": "tweezers", "streaming_id": 6 },
 							  { "label": "holder", "streaming_id": 17 },
@@ -12,11 +12,11 @@
 				   "frame_timeout": 0.1,
 				   "streaming_ip": "*",
 				   "streaming_port": 5558,
-				   "status": "on" },
+				   "status": "simulated" },
 
 	"camera": { "streaming_ip": "*",
 	            "streaming_port": 5560,
-	            "status": "on" },
+	            "status": "simulated" },
 
 	"tps": { "nb_adapters": 1,
 			 "fingers": [{ "label": "left_middle", "streaming_id": 0 },
@@ -29,7 +29,7 @@
 			 "streaming_port": 5562,
 			 "sensor_ip": "127.0.0.1",
 			 "sensor_port": 4242,
-			 "status": "on" },
+			 "status": "simulated" },
 
 	"ft_sensor": { "status": "off" }
 }
