@@ -62,21 +62,24 @@ app.layout = html.Div(
                                         dcc.Store(id='window_size', data=2000)
                                      ],
                                      style={'color': '#1E1E1E'}),
-                                 html.P('Time sequence selection'),
-                                 dcc.RangeSlider(
-                                  id="slider_frame",
-                                  min=0,
-                                  max=100,
-                                  step=0.1,
-                                  value=[0.,100.],
-                                  marks={
-                                      0: {'label': '0', 'style': {'color': 'rgb(200, 200, 255)'}},
-                                      25: {'label': '25','style': {'color': 'rgb(200, 200, 255)'}},
-                                      50: {'label': '50', 'style': {'color': 'rgb(200, 200, 255)'}},
-                                      75: {'label': '75','style': {'color': 'rgb(200, 200, 255)'}},
-                                      100: {'label': '100', 'style': {'color': 'rgb(200, 200, 255)'}}
-                                  },
-                                  ),
+                                 #html.P('Time sequence selection'),
+                                 #dcc.RangeSlider(
+                                  #id="slider_frame",
+                                  #min=0,
+                                  #max=100,
+                                     
+                                  #step=0.1
+                                  #step=0.01,
+                                     
+                                  #value=[0.,10.],
+                                  #marks={
+                                      #0: {'label': '0', 'style': {'color': 'rgb(200, 200, 255)'}},
+                                     #25: {'label': '25','style': {'color': 'rgb(200, 200, 255)'}},
+                                      #50: {'label': '50', 'style': {'color': 'rgb(200, 200, 255)'}},
+                                      #75: {'label': '75','style': {'color': 'rgb(200, 200, 255)'}},
+                                      #100: {'label': '100', 'style': {'color': 'rgb(200, 200, 255)'}}
+                                  #},
+                                  #),
                                  html.P('Playback speed selection'),
                                  dcc.Slider(
                                     id="speed_selector",
@@ -100,7 +103,9 @@ app.layout = html.Div(
                                       html.Button('Export', id='btn-export', n_clicks=0),
                                       html.Div(id='output_text'),
                                       ],
+                                      #style={'padding-bottom': 35}
                                       style={'padding-bottom': 35}
+
                                   ),
                                 
                                  html.Div(className='graphs',
@@ -111,14 +116,34 @@ app.layout = html.Div(
                             ),
                     html.Div(className='nine columns div-for-charts bg-grey',
                                children=[
-                                html.Div(className='images',
+                                   html.P('Time sequence selection'),
+                                   dcc.RangeSlider(
+                                   id="slider_frame",
+                                   min=0,
+                                   max=100,
+                                     
+                                   step=0.1,
+                                  #step=0.01,
+                                     
+                                   value=[0.,100.],
+                                   marks={
+                                      0: {'label': '0', 'style': {'color': 'rgb(200, 200, 255)'}},
+                                      25: {'label': '25','style': {'color': 'rgb(200, 200, 255)'}},
+                                      50: {'label': '50', 'style': {'color': 'rgb(200, 200, 255)'}},
+                                      75: {'label': '75','style': {'color': 'rgb(200, 200, 255)'}},
+                                      100: {'label': '100', 'style': {'color': 'rgb(200, 200, 255)'}}
+                                   },
+                                   ),
+                             
+                                   html.Div(className='images',
                                          children=[ html.Img(id='rgb_image', height="480", width="640", style={'display': 'inline-block', 'margin-left': '10px', 'margin-bottom':'20px' }),
-                                                    dcc.Graph(id='opt',config={'displayModeBar': True, 'autosizable': True}, animate=False, style={'display': 'inline-block', 'margin-left': '10px', 'margin-bottom':'20px'})],
+                                                    dcc.Graph(id='opt',config={'displayModeBar': True, 'autosizable': True}, animate=False, style={'display': 'inline-block', 'margin-left': '100px', 'margin-bottom':'20px'})],
                                          style={'left-padding': 200}                                        
                                          ),
-                                html.Div(className='graphs',
-                                         children=[dcc.Graph(id='timeseries', config={'displayModeBar': False}, animate=False,  style={'margin-left': '10px'})],                                        
+                                   html.Div(className='graphs',
+                                         children=[dcc.Graph(id='timeseries', config={'displayModeBar': False}, animate=False,  style={'margin-left': '100px'})],                                        
                                          ),
+                           
                                ],
                                )
                  ])
@@ -399,7 +424,7 @@ def opt_graph(selected_frame, selected_exp):
                           xaxis = dict(
 
                                backgroundcolor="rgb(200, 200, 230)",
-                               gridcolor="white",
+                              gridcolor="white",
                                showbackground=True,
                                zerolinecolor="white",
                                nticks=10,
@@ -439,7 +464,7 @@ def opt_graph(selected_frame, selected_exp):
     return fig
 
 
-# Callback for tps price
+ #Callback for tps price
 @app.callback(Output('tps', 'figure'),
               [Input('selected_tps_frame', 'data')],
               [State('selected_exp', 'data')])
